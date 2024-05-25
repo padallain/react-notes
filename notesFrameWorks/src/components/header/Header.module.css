@@ -1,0 +1,26 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.save {
+    background-color: #e1e1e1;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  
+  .save:hover {
+    background-color: #ededed;
+  }
+
+  .darkMode{
+    background-color: black;
+
+  }
+
+  .darkMode h1{
+    color: white;
+  }
