@@ -1,17 +1,26 @@
 .noteNew {
-    background-color: #67d7cc;
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
+  margin-bottom: 1rem;
+}
 
-textarea{
-    border: none;
-    resize: none;
-    background-color: #67d7cc;
+.noteNew textarea {
+  width: 100%;
+  max-width: 100%;
+  height: 100px;
+  max-height: 150px;
+  overflow: hidden;
+}
+
+textarea {
+  border: none;
+  resize: none;
+  background-color: #67d7cc;
+  border-radius: 15px;
+  text-indent: 12px; /* Sangrar el texto 5px a la derecha */
 }
 textarea:focus{
     outline: none;
+    
+
 }
   
   .noteFooter {

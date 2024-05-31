@@ -1,21 +1,30 @@
-.note{
-    background-color: #fef68a ;
-    border-radius: 10px;
-    padding: 1rem;
-    min-height: 170px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    white-space: pre-wrap;
-
+.note {
+  background-color: #fef68a;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  white-space: pre-wrap;
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+.noteText {
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.noteFooter{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.noteFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.deleteIcon{
-    cursor: pointer;
+.deleteIcon {
+  cursor: pointer;
 }
+

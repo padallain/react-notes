@@ -1,8 +1,63 @@
-.container{
-    max-width: 960px;
-    margin-right: auto ;
-    margin-left: auto;
-    padding-right: 15px;
-    padding-left: 15px;
+.mainContainer {
+  display: flex;
+}
 
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.sidebar {
+  width: 40%;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  border-right: 1px solid #ddd;
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+}
+
+
+.supercontainer {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.darkMode {
+  background-color: black;
+  color: white;
+}
+
+.darkMode h1,
+.darkMode .text-center,
+.darkMode .btn {
+  color: white;
+}
+
+.darkMode .header {
+  color: white;
+}
+
+.darkMode .save {
+  background-color: #333;
+  color: white;
+}
+
+.darkMode .save:hover {
+  background-color: #444;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.save {
+  background-color: #e1e1e1;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.save:hover {
+  background-color: #ededed;
 }

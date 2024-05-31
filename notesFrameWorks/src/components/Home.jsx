@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
 import appFireBase from "../credencials";
-import NodeList from "./notelist/NoteList";
 import style from "./Home.module.css";
 import { getAuth, signOut } from "firebase/auth";
 import Search from "./search/Search";
 import Header from "./header/Header";
+import SideBar from "./sidebar/SideBar";
+import Main from "./main/Main";
 
 const today = new Date();
 const currentDay = today.getDate();
@@ -19,64 +20,80 @@ function Home({ userEmail }) {
   const [notes, setNotes] = useState([
     {
       id: nanoid(),
-      text: "This is my first note",
+      title: "This is my first note",
+      text: "Content of the first note",
       date: fullDate,
     },
     {
       id: nanoid(),
-      text: "This is my second note",
+      title: "This is my second note",
+      text: "Content of the second note",
       date: fullDate,
     },
     {
       id: nanoid(),
-      text: "This is my third note",
+      title: "This is my third note",
+      text: "Content of the third note",
       date: fullDate,
     },
     {
       id: nanoid(),
-      text: "This is my new note",
+      title: "This is my new note",
+      text: "Content of the new note",
       date: fullDate,
     },
   ]);
 
-const [searchText,setSearchText]=useState('')
+  const [searchText, setSearchText] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
 
-const [darkMode,setDarkMode]=useState(false);
-
-
-
-  const addNote = (text) => {
+  const addNote = ( title) => {
     const date = new Date();
     const newNote = {
       id: nanoid(),
-      text,
+      title,
+      text: '',
       date: date.toLocaleDateString(),
     };
     const newNotes = [...notes, newNote];
     setNotes(newNotes);
   };
 
-  const deleteNote=(id)=>{
-    const newNotes= notes.filter((note)=>note.id!==id)
-    setNotes(newNotes)
-  }
+  const deleteNote = (id) => {
+    const newNotes = notes.filter((note) => note.id !== id);
+    setNotes(newNotes);
+  };
+
+  const updateNote = (id, updatedNote) => {
+    const newNotes = notes.map((note) =>
+      note.id === id ? updatedNote : note
+    );
+    setNotes(newNotes);
+  };
 
   return (
-    <div className={`${darkMode && 'darkMode'}`}>
+    <div className={`${darkMode ? style.darkMode : ''}`}>
+      <Header handleToggleDarkMode={setDarkMode} />
       <h2 className="text-center">
         Welcome {userEmail}{" "}
         <button className="btn btn-primary" onClick={() => signOut(auth)}>
           Log Out
         </button>
       </h2>
-      <div className={style.container}>
-        <Header handleToggleDarkMode={setDarkMode}/> 
-        <Search handleSearchNote={setSearchText}/>
-        <NodeList notes={notes.filter((note)=>
-        note.text.toLowerCase().includes(searchText)
-        )} 
-        handleAddNote={addNote} 
-        handleDeleteNote={deleteNote}/>
+      <div className={style.mainContainer}>
+        <SideBar
+          notes={notes.filter((note) =>
+            note.title.toLowerCase().includes(searchText.toLowerCase())
+          )}
+          handleAddNote={addNote}
+          handleDeleteNote={deleteNote}
+          handleSelectNote={(note) => setSelectedNote(note)}
+        />
+        <Main
+          selectedNote={selectedNote}
+          handleUpdateNote={updateNote}
+        />
       </div>
     </div>
   );

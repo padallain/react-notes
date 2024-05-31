@@ -1,0 +1,12 @@
+.sidebarHeader {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebarNotes {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+  max-height: calc(100vh - 70px); /* Ajusta la altura para ocupar el espacio restante bajo el header */
+}
