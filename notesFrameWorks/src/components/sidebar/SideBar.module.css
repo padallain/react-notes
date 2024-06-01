@@ -1,0 +1,34 @@
+.sidebar {
+  width: 30%; /* Fijar el ancho del sidebar al 30% */
+  height: 100vh; /* Hacer que ocupe toda la altura de la ventana */
+  border-right: 1px solid #ddd;
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+  display: flex;
+  flex-direction: column; /* Asegura que las notas se apilen verticalmente */
+}
+
+.sidebarHeader {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebarNotes {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto; /* Permite el desplazamiento vertical */
+}
+
+.sidebarNote {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+  overflow: hidden; /* Oculta el texto desbordante */
+  text-overflow: ellipsis; /* Añade puntos suspensivos al texto desbordante */
+}
+
+.sidebarNote:hover {
+  background-color: #f0f0f0; /* Cambia el color de fondo al pasar el ratón */
+}

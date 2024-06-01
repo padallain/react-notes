@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Vector from "../assets/loginvector.png";
-import ImageProfile from "../assets/profile1.jpg";
+import ImageProfile from "../assets/acceso.png";
 import appFireBase from "../credencials";
 import {
   getAuth,
@@ -13,6 +13,12 @@ const auth = getAuth(appFireBase);
 function Login() {
   const [register, setRegister] = useState(false);
 
+  function isValidEmail(email) {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+)(\.[^<>()\[\]\\.,;:\s@"]+)*)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-]+)\.[a-zA-Z]{2,}))$/;
+    return regex.test(email);
+  }
+  
+
   const authentication = async (e)=>{
     e.preventDefault();
     const email= e.target.email.value;
@@ -21,9 +27,13 @@ function Login() {
 
     if (register) {
         try {
-            await createUserWithEmailAndPassword(auth,email, password)
+            if(isValidEmail(email)){
+              await createUserWithEmailAndPassword(auth,email, password);
+            }else{
+              alert ('Wrong Email, rewrite your email');
+            }
         } catch (error) {
-            alert('Asegurese que la contraseña tenga mas de 8 caracteres')
+            alert('Asegurese que la contraseña tenga mas de 8 caracteres y/o no tengas sesion')
         }
     }
     else{
@@ -76,7 +86,6 @@ function Login() {
         </div>
 
         <div className="col-md-8">
-          <img src={Vector} alt="" className="tamano-imagen" />
         </div>
       </div>
     </div>
