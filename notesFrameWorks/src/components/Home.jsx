@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { openDB } from 'idb';
+import React, { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import appFireBase from "../credencials";
 import style from "./Home.module.css";
@@ -8,47 +9,56 @@ import Header from "./header/Header";
 import SideBar from "./sidebar/SideBar";
 import Main from "./main/Main";
 
-const today = new Date();
-const currentDay = today.getDate();
-const currentMonth = today.getMonth() + 1; // Months are 0-indexed, so add 1
-const currentYear = today.getFullYear();
-const fullDate = `${currentDay}/${currentMonth}/${currentYear}`;
-
 const auth = getAuth(appFireBase);
 
-function Home({ userEmail }) {
-  const [notes, setNotes] = useState([
-    {
-      id: nanoid(),
-      title: "This is my first note",
-      text: "Content of the first note",
-      date: fullDate,
+// Inicializa la base de datos
+const initDB = async () => {
+  return openDB('NotesDB', 1, {
+    upgrade(db) {
+      db.createObjectStore('notes', {
+        keyPath: 'id',
+        autoIncrement: true,
+      });
     },
-    {
-      id: nanoid(),
-      title: "This is my second note",
-      text: "Content of the second note",
-      date: fullDate,
-    },
-    {
-      id: nanoid(),
-      title: "This is my third note",
-      text: "Content of the third note",
-      date: fullDate,
-    },
-    {
-      id: nanoid(),
-      title: "This is my new note",
-      text: "Content of the new note",
-      date: fullDate,
-    },
-  ]);
+  });
+};
 
+function Home({ userEmail }) {
+  const [notes, setNotes] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [darkMode, setDarkMode] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
 
-  const addNote = ( title) => {
+  useEffect(() => {
+    const fetchNotes = async () => {
+      const db = await initDB();
+      const allNotes = await db.getAll('notes');
+      setNotes(allNotes);
+    };
+    fetchNotes();
+  }, []);
+
+  useEffect(() => {
+    const saveNotes = async () => {
+      const db = await initDB();
+      for (const note of notes) {
+        await db.put('notes', note);
+      }
+    };
+    saveNotes();
+  }, [notes]);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.style.backgroundColor = 'black';
+      document.documentElement.style.color = 'white';
+    } else {
+      document.documentElement.style.backgroundColor = '';
+      document.documentElement.style.color = '';
+    }
+  }, [darkMode]);
+
+  const addNote = (title) => {
     const date = new Date();
     const newNote = {
       id: nanoid(),
@@ -60,7 +70,9 @@ function Home({ userEmail }) {
     setNotes(newNotes);
   };
 
-  const deleteNote = (id) => {
+  const deleteNote = async (id) => {
+    const db = await initDB();
+    await db.delete('notes', id);
     const newNotes = notes.filter((note) => note.id !== id);
     setNotes(newNotes);
   };
@@ -73,7 +85,7 @@ function Home({ userEmail }) {
   };
 
   return (
-    <div className={`${darkMode ? style.darkMode : ''}`}>
+    <div className={`${darkMode ? style.darkMode : ''} ${style.supercontainer}`}>
       <Header handleToggleDarkMode={setDarkMode} />
       <h2 className="text-center">
         Welcome {userEmail}{" "}

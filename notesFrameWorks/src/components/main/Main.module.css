@@ -1,32 +1,73 @@
 .main {
-    padding: 15px;
-    width: 70%;
-  }
-  
-  .titleInput {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-  }
-  
-  .textarea {
-    width: 100%;
-    height: 300px;
-    padding: 10px;
-    font-size: 1rem;
-    resize: none;
-  }
-  
-  .saveButton {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .saveButton:hover {
-    background-color: #45a049;
-  }
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex-grow: 1; /* Asegura que el contenedor ocupe todo el espacio disponible */
+  display: flex;
+  flex-direction: column;
+}
+
+.titleInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  background-color: var(--input-background-color); /* Usar variable CSS para el color de fondo */
+  color: var(--input-text-color); /* Usar variable CSS para el color del texto */
+  border: 1px solid var(--input-border-color); /* Usar variable CSS para el color del borde */
+}
+
+.editorContainer {
+  flex-grow: 1; /* Asegura que el editor ocupe el espacio disponible */
+  display: flex;
+  flex-direction: column;
+}
+
+.saveButton {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-start; /* Alinea el botón a la izquierda */
+}
+
+.saveButton:hover {
+  background-color: #0056b3;
+}
+
+:root {
+  --background-color: #fff;
+  --text-color: #000;
+  --sidebar-background-color: #f8f9fa;
+  --sidebar-text-color: #000;
+  --input-background-color: #fff; /* Color de fondo por defecto */
+  --input-text-color: #000; /* Color del texto por defecto */
+  --input-border-color: #ccc; /* Color del borde por defecto */
+}
+
+.darkMode :root {
+  --background-color: #121212;
+  --text-color: #e0e0e0;
+  --sidebar-background-color: #1e1e1e;
+  --sidebar-text-color: #e0e0e0;
+  --input-background-color: #333; /* Color de fondo en modo oscuro */
+  --input-text-color: #e0e0e0; /* Color del texto en modo oscuro */
+  --input-border-color: #444; /* Color del borde en modo oscuro */
+}
+
+.darkMode .main {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.darkMode .sidebar {
+  background-color: var(--sidebar-background-color);
+  color: var(--sidebar-text-color);
+}

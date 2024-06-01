@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Vector from "../assets/loginvector.png";
-import ImageProfile from "../assets/profile1.jpg";
+import ImageProfile from "../assets/acceso.png";
 import appFireBase from "../credencials";
 import {
   getAuth,
@@ -86,7 +86,6 @@ function Login() {
         </div>
 
         <div className="col-md-8">
-          <img src={Vector} alt="" className="tamano-imagen" />
         </div>
       </div>
     </div>

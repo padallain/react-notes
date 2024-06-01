@@ -1,63 +1,72 @@
+.supercontainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
 .mainContainer {
   display: flex;
-}
-
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 15px;
-}
-
-.sidebar {
-  width: 40%;
-  height: 100vh; /* Ocupa toda la altura de la ventana */
-  border-right: 1px solid #ddd;
-  overflow-y: auto; /* Permite el desplazamiento vertical */
-}
-
-
-.supercontainer {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  flex-grow: 1;
+  height: 100%;
 }
 
 .darkMode {
-  background-color: black;
-  color: white;
+  --background-color: #121212;
+  --text-color: #e0e0e0;
 }
 
-.darkMode h1,
-.darkMode .text-center,
-.darkMode .btn {
-  color: white;
+.main {
+  flex-grow: 1; /* El main ocupa el espacio restante */
+  padding: 20px;
+  overflow-y: auto;
 }
 
-.darkMode .header {
-  color: white;
+.titleInput {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
 }
 
-.darkMode .save {
-  background-color: #333;
-  color: white;
+.editorContainer {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.darkMode .save:hover {
-  background-color: #444;
+.toolbar {
+  margin-bottom: 10px;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.save {
-  background-color: #e1e1e1;
+.saveButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  padding: 5px 10px;
-  border-radius: 15px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.save:hover {
-  background-color: #ededed;
+.saveButton:hover {
+  background-color: #0056b3;
+}
+
+:root {
+  --background-color: #fff;
+  --text-color: #000;
+  --sidebar-background-color: #f8f9fa;
+  --sidebar-text-color: #000;
+}
+
+.darkMode .main {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.darkMode .sidebar {
+  background-color: var(--sidebar-background-color);
+  color: var(--sidebar-text-color);
 }

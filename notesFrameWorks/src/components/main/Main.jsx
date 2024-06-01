@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import style from './Main.module.css';
+import ReactQuill from 'react-quill';
+import "react-quill/dist/quill.snow.css";
 
 const Main = ({ selectedNote, handleUpdateNote }) => {
   const [noteTitle, setNoteTitle] = useState('');
@@ -27,7 +29,7 @@ const Main = ({ selectedNote, handleUpdateNote }) => {
   }
 
   return (
-    <div className={style.main}>
+    <div className={style.container}>
       <input
         type="text"
         value={noteTitle}
@@ -35,11 +37,10 @@ const Main = ({ selectedNote, handleUpdateNote }) => {
         placeholder="Note Title"
         className={style.titleInput}
       />
-      <textarea
+      <ReactQuill
         value={noteText}
-        onChange={(e) => setNoteText(e.target.value)}
-        placeholder="Note Content"
-        className={style.textarea}
+        onChange={setNoteText}
+        className={style.editorContainer}
       />
       <button onClick={handleSave} className={style.saveButton}>
         Save
@@ -49,3 +50,4 @@ const Main = ({ selectedNote, handleUpdateNote }) => {
 };
 
 export default Main;
+    
